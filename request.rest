@@ -1,0 +1,18 @@
+POST http://localhost:3000/solicitacao
+Content-Type: application/json
+
+{
+  "nome": "aaaaaaaaaaa",
+  "email": "TS10",
+  "orgao": "LOCALIZA",
+  "telefone": "8191621",
+  "migo": "DESCONHECIDO",
+  "pep": "DESCONHECIDO",
+  "urgente": "True",
+  "diaReserva": "2023-01-04T12:00:00Z",
+  "diaLimite": "2023-01-05T12:00:00Z",
+  "enderecoPartida": "São Paulo",
+  "enderecoDestino": "Recife-PE"
+}
+
+
