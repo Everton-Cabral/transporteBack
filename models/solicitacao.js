@@ -13,6 +13,20 @@ const solicitacaoSchema = new Schema({
     diaLimite: Date,
     enderecoPartida: String,
     enderecoDestino: String,
+    distancia: String,
+    materiais: [{
+        codSap: String,
+        descricao: String,
+        qtd: Number,
+        unidade: String,
+        comprimento: Number,
+        altura: Number,
+        largura: Number,
+        volume: Number,
+        peso: Number,
+        pesoTotal: Number,
+        estivacao: String,
+    }],
 })
 const Solicitacao = mongoose.model('Solicitacao', solicitacaoSchema);
 module.exports = Solicitacao;

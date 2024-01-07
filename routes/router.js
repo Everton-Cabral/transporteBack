@@ -4,6 +4,9 @@ const router = require("express").Router()
 
 const solicitacaoRouter = require("./solicitacao")
 
-router.use("/", solicitacaoRouter)
+
+router.use("/solicitacao", solicitacaoRouter)
+
+
 
 module.exports = router;

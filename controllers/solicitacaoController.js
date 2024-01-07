@@ -16,17 +16,36 @@ const solicitacaoController = {
                 diaLimite: req.body.diaLimite,
                 enderecoPartida: req.body.enderecoPartida,
                 enderecoDestino: req.body.enderecoDestino,
+                distancia: req.body.distancia,
+                materiais: req.body.materiais,
             };
-            console.log("Dados de entrada:", solicitacao);
+            
             const response = await Solicitacao.create(solicitacao);
             res.status(201).json({ response, msg: "Solicitação Criada com Sucesso" });
-            console.log("Solicitação criada com sucesso:", response);
 
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: "Erro interno do servidor" });
         }
-    }
+    },
+
+    getAll: async (req,res) =>{
+        try{
+            const solicitacoes = await Solicitacao.find();
+            res.json(solicitacoes)
+        } catch (error){
+            console.log(error)
+        }
+    },
+    getID: async (req,res) =>{
+        try{
+            const id = req.params.id
+            const solicitacao = await Solicitacao.findById(id);
+            res.json(solicitacao)
+        } catch (error){
+            console.log(error)
+        }
+    },
 }
 
 module.exports = solicitacaoController;
