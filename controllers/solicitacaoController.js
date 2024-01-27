@@ -1,4 +1,15 @@
-const  Solicitacao  = require("../models/solicitacao");
+const  Solicitacao  = require("../models/solicitacao");;
+const AWS = require('aws-sdk')
+const upload = require('../middlewares/uploadMiddleare'); 
+const path = require('path');
+
+
+
+const fs = require('fs');
+
+
+
+
 
 const solicitacaoController = {
     
@@ -46,6 +57,38 @@ const solicitacaoController = {
             console.log(error)
         }
     },
+   
+    uploadFile: async (req,res) =>{
+        try{
+            const { id } = req.params.id;
+            const { documento } = req.params.documento;
+            const { file } = req;
+
+            if (!file) {
+                return res.status(400).send('Nenhum arquivo enviado');
+              } else{
+                console.log('arquivo enviado')
+                console.log(id)
+              }
+                // Obtenha o conteúdo do arquivo como Buffer
+                const fileContent = file.buffer;
+
+              const params = {
+                Bucket: 'transporte-files',
+                Key: `uploads/${id}/${documento}/${file.originalname}`,
+                Body: fileContent,
+                ContentType: file.mimetype,
+                ContentDisposition: 'inline',
+              };
+              // Utiliza o SDK da AWS configurado globalmente
+             await req.app.get('s3').upload(params).promise();
+        
+
+        } catch (error){
+            console.error('Erro durante o upload para o S3:', error);
+            return res.status(500).json({ message: 'Erro durante o upload para o S3', error: error.message });
+        }
+    } 
 }
 
 module.exports = solicitacaoController;

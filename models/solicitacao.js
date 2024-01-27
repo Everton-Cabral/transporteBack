@@ -27,6 +27,15 @@ const solicitacaoSchema = new Schema({
         pesoTotal: Number,
         estivacao: String,
     }],
+    motorista:{
+        nome: String,
+        telefone: String,
+        crlv: String,
+        antt: String,
+        cnhMotorista: String,
+        cnhProprietario: String,
+        comprovanteResidencia: String,
+    }
 })
 const Solicitacao = mongoose.model('Solicitacao', solicitacaoSchema);
 module.exports = Solicitacao;

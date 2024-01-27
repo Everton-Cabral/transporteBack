@@ -1,6 +1,7 @@
 const router = require("express").Router()
-
 const solicitacaoController = require("../controllers/solicitacaoController")
+const upload = require('../middlewares/uploadMiddleare'); 
+
 
 router
     .route("/cadastro")
@@ -13,6 +14,12 @@ router
 router
     .route("/consultaId/:id")
     .get((req,res) => solicitacaoController.getID(req,res));
+
+
+router
+    .route("/upload/:id/:documento")
+    .post(upload.single('file'), solicitacaoController.uploadFile) 
+
 
 
 module.exports = router
